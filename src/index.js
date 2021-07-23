@@ -11,6 +11,9 @@ const test = () => {
     console.log(111)
     console.log(a)
     console.log(b)
+
+    $('.heds').text("heds")
+
 }
 test();
 

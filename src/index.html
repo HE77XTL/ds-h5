@@ -6,13 +6,25 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ds-h5</title>
+    <link rel="stylesheet" href="./lib/mobilebone/mobilebone.css">
+    <link rel="stylesheet" href="./lib/mobilebone/mobilebone.animate.css">
+    <script src="./lib/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<h3>
-    ds-h5
-</h3>
-<div class="pageCommon">
-    mobileBone
+<div>
+    <div id="page1" class="page out">
+        <p>　页面1，<a href="#page2">下一页</a></p>
+        <div id="he001">
+            id 重复测试
+        </div>
+    </div>
+    <div id="page2" class="page out">
+        <p>　页面2，<a href="#page1">上一页</a></p>
+        <div>
+            <a href="./pages/about/index.html" data-reload="true">每次都请求</a>
+        </div>
+    </div>
 </div>
+<script src="./lib/mobilebone/mobilebone.js"></script>
 </body>
 </html>
