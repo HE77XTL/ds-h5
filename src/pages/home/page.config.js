@@ -2,7 +2,7 @@ module.exports = {
     pages: [
         {
             entry: 'index.js',
-            template: 'index.html',
+            template: 'index.ejs',
             filename: 'index.html',
         }
     ]

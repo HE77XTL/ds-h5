@@ -28,7 +28,7 @@ function getEntryAndTemplate(modelData) {
             const entryKey = item.name + '_' + pagesItem.entry.replace('.js', '');
             htmlTemplate.push(new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, `./src/pages/${item.name}/${pagesItem.template}`),
-                filename: `pages/${item.name}/${pagesItem.template}`,
+                filename: `pages/${item.name}/${pagesItem.filename}`,
                 chunks: [entryKey],
             }));
             entry[entryKey] = path.resolve(__dirname, `./src/pages/${item.name}/${pagesItem.entry}`);
@@ -47,30 +47,24 @@ console.log('entry, htmlTemplate')
 console.log(entry, htmlTemplate)
 
 
-
 module.exports = {
     mode: 'production',
-    entry: {
-        index: './src/index.js',
-        about: './src/pages/about/index.js',
-    },
+    entry: entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name]_v[hash].js',
         clean: true,
     },
-    plugins: [
-        new HtmlWebpackPlugin({template: './src/index.html',filename: `index.html`}),
-        new HtmlWebpackPlugin({template: './src/pages/about/index.html', filename: `pages/about/index.html`}),
+    plugins: htmlTemplate.concat([
         new MiniCssExtractPlugin({
             filename: `css/[name]_v[hash].css`
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "./src/lib", to: "./lib" },
+                {from: "./src/lib", to: "./lib"},
             ],
         })
-    ],
+    ]),
 
     module: {
         rules: [
@@ -92,6 +86,12 @@ module.exports = {
                             },
                         },
                     },
+                ]
+            },
+            {
+                test: /.ejs$/,
+                use: [
+                    'ejs-compiled-loader'
                 ]
             },
             {
