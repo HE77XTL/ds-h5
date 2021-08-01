@@ -49,13 +49,21 @@ console.log(entry, htmlTemplate)
 
 module.exports = {
     mode: 'production',
-    entry: entry,
+    entry: {
+        app: path.resolve(__dirname, './src/index.js'),
+        ...entry
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name]_v[hash].js',
         clean: true,
     },
     plugins: htmlTemplate.concat([
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, './src/index.html'),
+            filename: `index.html`,
+            chunks: ['app'],
+        }),
         new MiniCssExtractPlugin({
             filename: `css/[name]_v[hash].css`
         }),
